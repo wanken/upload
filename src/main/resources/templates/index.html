@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- 包含头部信息用于适应不同设备 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>index</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/js/resources/sweetalert2.css}">
+    <link rel="stylesheet" th:href="@{/css/resources/index.css}">
+</head>
+<body>
+<div th:include="header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <span>选择年级:</span>
+            </div>
+            <div class="checkbox-wrap col-lg-8 col-md-8 col-sm-8">
+                <input type="checkbox" value="cz" name="choose" id="cz">
+                <label for="cz">初中</label>
+                <input type="checkbox" value="gy" name="choose" id="gy">
+                <label for="gy">高一</label>
+                <input type="checkbox" value="ge" name="choose" id="ge">
+                <label for="ge">高二</label>
+                <input type="checkbox" value="gs" name="choose" id="gs">
+                <label for="gs">高三</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-md-2 col-sm-2"><span>选择资源教师:</span></div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <select id="teachers" class="form-control input-lg">
+                    <option value=""></option>
+                    <option value="yuwen.">语文</option>
+                    <option value="shuxue.">数学</option>
+                    <option value="yingyu.">英语</option>
+                    <option value="zhengzhi.">政治</option>
+                    <option value="lishi.">历史</option>
+                    <option value="dili.">地理</option>
+                    <option value="wuli.">物理</option>
+                    <option value="huaxue.">化学</option>
+                    <option value="shengwu.">生物</option>
+                    <option id="teacher-lz" value="lizong." hidden>理综</option>
+                    <option id="teacher-wz" value="wenzong." hidden>文综</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-md-2 col-sm-2"><span>选择资源教师:</span></div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <form>
+                    <input type="file" name="file" multiple  id="uploadFile">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="startUpload">开始上传</button>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/jquery/jquery.cookie.min.js}"></script>
+<script th:src="@{/css/bootstrap/js/bootstrap.js}"></script>
+<script th:src="@{/js/resources/sweetalert2.all.js}"></script>
+<script th:src="@{/js/customer/index.js}"></script>
+
+</body>
+</html>

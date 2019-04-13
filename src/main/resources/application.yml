@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /upload
+
+spring:
+  #  profiles:
+  #    active: test
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+    mode: HTML
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50
+      max-request-size: 50
+  mvc:
+    favicon:
+      enabled: false
+
+
+dfs:
+  host: http://waver.club/group1/M00/00/00/
+  group: group1
+  filePath: M00
