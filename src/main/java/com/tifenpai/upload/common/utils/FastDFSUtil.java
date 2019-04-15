@@ -3,11 +3,17 @@ package com.tifenpai.upload.common.utils;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Objects;
 
 
 /**
@@ -18,11 +24,7 @@ import java.io.InputStream;
 @Component
 public class FastDFSUtil {
 
-    @Autowired
-    private HttpServletRequest httpServletRequest;
-
     public FastDFSUtil() {
-
         String configFileName = "D:\\Config\\fdfs_client.conf";
         try {
             ClientGlobal.init(configFileName);
@@ -31,9 +33,6 @@ public class FastDFSUtil {
         }
     }
 
-
-
-
     /**
      * 上传文件
      */
@@ -41,7 +40,7 @@ public class FastDFSUtil {
         System.out.println("上传文件=======================");
         byte[] fileBuff = getFileBuffer(inputStream, fileLength);
         String[] files = null;
-        String fileExtName = "";
+        String fileExtName;
         if (uploadFileName.contains(".")) {
             fileExtName = uploadFileName.substring(uploadFileName.lastIndexOf(".") + 1);
         } else {
@@ -77,12 +76,10 @@ public class FastDFSUtil {
         byte[] fileBuffer = new byte[(int) fileLength];
 
         int count = 0;
-        int length = 0;
+        int length;
 
         while ((length = inStream.read(buffer)) != -1) {
-            for (int i = 0; i < length; ++i) {
-                fileBuffer[count + i] = buffer[i];
-            }
+            System.arraycopy(buffer, 0, fileBuffer, count, length);
             count += length;
         }
         return fileBuffer;
@@ -129,7 +126,7 @@ public class FastDFSUtil {
         StorageServer storageServer = null;
 
         StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-        NameValuePair nvps[] = storageClient.get_metadata(groupName, filepath);
+        NameValuePair[] nvps = storageClient.get_metadata(groupName, filepath);
         for (NameValuePair nvp : nvps) {
             System.out.println(nvp.getName() + ":" + nvp.getValue());
         }
